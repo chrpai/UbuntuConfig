@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define ComponentRules="OneToOne"?>
+  <!-- SourceDir instructs IsWiX the location of the directory that contains files for this merge module -->
+  <?define SourceDir="..\Deploy"?>
+  <Module Id="UbuntuConfigMM" Language="1033" Version="1.0.0.0">
+    <Package Id="fc13eeb7-0c1e-4061-8793-da68bb123b88" Manufacturer="UbuntuConfigMM" InstallerVersion="200" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="MergeRedirectFolder">
+        <Component Id="owc7DF4924F55A4AA4970AD7C0B8821B8D1" Guid="26217c66-6c70-5162-2bd6-3d6a2ca37585">
+          <File Id="owf7DF4924F55A4AA4970AD7C0B8821B8D1" Source="$(var.SourceDir)\installUbuntuLTS.ps1" KeyPath="yes" />
+        </Component>
+      </Directory>
+    </Directory>
+    <ComponentGroupRef Id="Custom" />
+  </Module>
+</Wix>

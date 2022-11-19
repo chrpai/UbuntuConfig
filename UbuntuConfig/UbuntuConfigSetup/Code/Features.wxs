@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="CompanyFolder" Name="My Company">
+          <Directory Id="INSTALLLOCATION" Name="UbuntuConfig">
+			  <Component Id="ps1" Guid="{088C0D20-DA3E-4FB5-9D5B-376DDF3CEA22}" KeyPath="yes" Win64="yes" >
+				  <File Id="ps1"  Source="..\Deploy\installUbuntuLTS.ps1"/>
+			  </Component>
+			  <Directory Id="staging" Name="staging">
+				  <!--Acquired from https://aka.ms/wslubuntu2004 and renamed to ncircle.zip-->
+				  <Component Id="ncircle" Guid="{11116F25-60A2-453F-9722-1B8E82FA98EE}" KeyPath="yes"  Win64="yes">
+					  <File Id="ncircle"  Source="..\Deploy\ncircle.zip"/>
+				  </Component>
+			  </Directory>
+		  </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+    <Feature Id="UbuntuConfig" Title="UbuntuConfig" Description="Installs all the files needed for UbuntuConfig" Level="1" AllowAdvertise="no" ConfigurableDirectory="INSTALLLOCATION">
+		<ComponentRef Id="ps1"/>
+		<ComponentRef Id="ncircle"/>
+	</Feature>
+  </Fragment>
+</Wix>
