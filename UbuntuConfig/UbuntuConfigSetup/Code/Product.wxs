@@ -33,10 +33,10 @@
 		</Property>
 
 		<SetProperty Id="InstallWSL" Value="&quot;[System64Folder]dism.exe&quot; /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /featurename:VirtualMachinePlatform /all /quiet " Sequence="execute" After="InstallInitialize" />
-		<CustomAction Id="InstallWSL" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="check" Impersonate="no" />
+		<CustomAction Id="InstallWSL" BinaryKey="WixCA" DllEntry="CAQuietExec64" Execute="deferred" Return="check" Impersonate="no" />
 
-		<SetProperty Id="InstallUbuntu" Value="&quot;[POWERSHELLEXE]&quot; -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp;'[#ps1]' -wslName ncircle -wslInstallationPath C:\WSL2\ncircle -username [WSLUSERNAME] -installAllSoftware yes&quot;" Sequence="execute" After="InstallInitialize" />
-		<CustomAction Id="InstallUbuntu" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="check" Impersonate="no" />
+		<SetProperty Id="InstallUbuntu" Value="&quot;[POWERSHELLEXE]&quot; -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;[#ps1]&quot; -wslName ncircle -wslInstallationPath C:\WSL2\ncircle -username [WSLUSERNAME] -installAllSoftware yes&quot;" Sequence="execute" After="InstallInitialize" />
+		<CustomAction Id="InstallUbuntu" BinaryKey="WixCA" DllEntry="CAQuietExec64" Execute="deferred" Return="check" Impersonate="no" />
 		
 		<InstallExecuteSequence>
 			<Custom Action="InstallWSL" After="SetInstallWSL">Not Installed</Custom>

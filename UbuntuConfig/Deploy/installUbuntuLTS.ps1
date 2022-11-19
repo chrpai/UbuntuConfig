@@ -4,12 +4,13 @@ Param (
 [Parameter(Mandatory=$True)][ValidateNotNull()][string]$username,
 [Parameter(Mandatory=$True)][ValidateNotNull()][string]$installAllSoftware
 )
-$env:Path += ";C:\Windows\System32"  
+write-host $env:Path
+
+Set-Location $PSScriptRoot
 
 wsl --update
 wsl --shutdown
 wsl --set-default-version 2
-
 
 # create staging directory if it does not exists
 
@@ -20,8 +21,8 @@ if (-Not (Test-Path -Path $wslInstallationPath)) {
 }
 wsl --import $wslName $wslInstallationPath .\staging\$wslName\install.tar.gz
 
-Remove-Item .\staging\$wslName.zip
-Remove-Item -r .\staging\$wslName\
+#Remove-Item $PSScriptRoot\staging\$wslName.zip
+#Remove-Item -r $PSScriptRoot\staging\$wslName\
 
 # Update the system
 wsl -d $wslName -u root bash -ic "apt update; apt upgrade -y"
